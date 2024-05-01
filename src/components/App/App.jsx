@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
+import SearchBox from '../SearchBox/SearchBox';
 
 const dataContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -11,14 +12,25 @@ const dataContacts = [
 ];
 
 function App() {
+  const [inputValue, setInputValue] = useState('');
   const [contacts, setContacts] = useState(dataContacts);
+
+  const handleDelete = id => {
+    setContacts(contacts.filter(contact => contact.id !== id));
+  };
+
+  const searchByName = contacts.filter(({ name }) => {
+    return name.toLowerCase().includes(inputValue.toLowerCase());
+  });
+  console.log(contacts);
+
   return (
     <>
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
-        {/* <SearchBox /> */}
-        <ContactList contacts={contacts} />
+        <ContactForm contacts={contacts} setContacts={setContacts} />
+        <SearchBox value={inputValue} onInput={setInputValue} />
+        <ContactList contacts={searchByName} onDelete={handleDelete} />
       </div>
     </>
   );
