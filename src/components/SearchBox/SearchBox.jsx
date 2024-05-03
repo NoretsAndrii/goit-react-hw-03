@@ -18,7 +18,6 @@ export default function SearchBox({ value, onInput }) {
           onInput(event.target.value);
         }}
       />
-      <p>{value}</p>
     </div>
   );
 }
