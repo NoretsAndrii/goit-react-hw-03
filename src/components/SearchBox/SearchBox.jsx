@@ -1,12 +1,15 @@
 import { useId } from 'react';
-// import { useState } from 'react';
+import css from './SearchBox.module.css';
 
 export default function SearchBox({ value, onInput }) {
   const searchNameFieldId = useId();
   return (
-    <>
-      <label htmlFor={searchNameFieldId}>Find contacts by name</label>
+    <div className={css.searchBox}>
+      <label className={css.label} htmlFor={searchNameFieldId}>
+        Find contacts by name
+      </label>
       <input
+        className={css.input}
         type="text"
         name="searchName"
         id={searchNameFieldId}
@@ -16,6 +19,6 @@ export default function SearchBox({ value, onInput }) {
         }}
       />
       <p>{value}</p>
-    </>
+    </div>
   );
 }
